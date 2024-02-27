@@ -3,12 +3,12 @@
 #include <time.h>
 
 int campeonato();
-char partida();
+int partida();
 int jogada(int arg);
-char dsj_fzr_jog(int soma);
-void prt_msg_part(int car_ale, int soma, int arg, int pais);
+int dsj_fzr_jog(int soma);
+void prt_msg_part(int car_ale, int soma, int arg);
 void random_cartas(int carta_aleatoria);
-char cnt_pnt_part(int pontos_arg, int pontos_usu);
+int cnt_pnt_part(int pontos_arg, int pontos_usu);
 void fim_camp(int camp_bra, int camp_arg);
 
 int main(){
@@ -95,7 +95,7 @@ int campeonato(){
     fim_camp(camp_bra, camp_arg);
 }
 
-char partida(){
+int partida(){
     int pontos_usu = 0, pontos_arg, v_part, arg, b, ret = -1;
     printf("A argentina comeca!\n");
     arg = 1;
@@ -148,7 +148,7 @@ char partida(){
 int jogada(int arg){
     int soma = 0, i, car_ale, a, pais;
     if (arg == 1){
-        printf("Agora e a minha vez de jogar!\n");
+        printf("Messi: 'Agora e a minha vez de jogar!'\n");
         pais = 1;
     }
     else{
@@ -170,7 +170,7 @@ int jogada(int arg){
         }
         
         random_cartas(car_ale);
-        prt_msg_part(car_ale, soma, arg, pais);
+        prt_msg_part(car_ale, soma, arg);
         if (soma > 21){
             break;
         }
@@ -178,7 +178,7 @@ int jogada(int arg){
     return soma;
 }
 
-char dsj_fzr_jog(int soma){
+int dsj_fzr_jog(int soma){
     int i = 0, cnfrm , c, ret = -1, ret2 = -1;
     while (i < 3){
         do{
@@ -197,10 +197,10 @@ char dsj_fzr_jog(int soma){
         printf("Deseja encerrar sua jogada ou continuar jogando? Caso deseje encerrar, digite 1. Caso deseje continuar, digite qualquer outro NUMERO INTEIRO:\n ");
         ret2 = scanf(" %i",&c);
         getchar();
-        if (ret == 0){
+        if (ret2 == 0){
             printf("Eu disse numero inteiro imbecil.\n");
         }
-    }while (ret == 0);
+    }while (ret2 == 0);
             if(soma == 0 && c == 1){
                 printf("Nao e possivel encerrar a jogada sem obter pontos.\n");
                 continue;
@@ -216,7 +216,7 @@ char dsj_fzr_jog(int soma){
     }
 }
 
-void prt_msg_part(int car_ale, int soma, int arg, int pais) {
+void prt_msg_part(int car_ale, int soma, int arg) {
     if (car_ale == 1){
         if (arg == 1){
             printf("Messi tirou As, que vale 1 ponto.\n");
@@ -400,7 +400,7 @@ void random_cartas(int carta_aleatoria){
     }
 }
 
-char cnt_pnt_part(int pontos_arg, int pontos_usu){
+int cnt_pnt_part(int pontos_arg, int pontos_usu){
     int vencedor;
     if ((pontos_arg > pontos_usu) && (pontos_arg < 21)){
         printf("A Argentina ganhou essa partida de %i s %i. :(\n",pontos_arg, pontos_usu);
